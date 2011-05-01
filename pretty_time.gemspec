@@ -9,8 +9,8 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Anuj Dutta"]
-  s.date = %q{2011-04-29}
-  s.description = %q{TODO: longer description of your gem}
+  s.date = %q{2011-05-01}
+  s.description = %q{Serializes time to pretty time string and vica-versa}
   s.email = %q{anuj@andhapp.com}
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -20,21 +20,24 @@ Gem::Specification.new do |s|
     ".document",
     ".rspec",
     "Gemfile",
+    "Gemfile.lock",
     "LICENSE.txt",
     "README.rdoc",
     "Rakefile",
     "VERSION",
     "lib/pretty_time.rb",
-    "spec/pretty_time_spec.rb",
+    "lib/pretty_time/core.rb",
+    "pretty_time.gemspec",
+    "spec/pretty_time/core_spec.rb",
     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/andhapp/pretty_time}
   s.licenses = ["MIT"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.6.2}
-  s.summary = %q{TODO: one-line summary of your gem}
+  s.summary = %q{Serialize time}
   s.test_files = [
-    "spec/pretty_time_spec.rb",
+    "spec/pretty_time/core_spec.rb",
     "spec/spec_helper.rb"
   ]
 

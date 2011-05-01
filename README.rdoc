@@ -1,6 +1,6 @@
 = pretty_time
 
-Description goes here.
+Serializes time in seconds to pretty time string and vica-versa.
 
 == Contributing to pretty_time
  

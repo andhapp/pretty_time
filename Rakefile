@@ -15,8 +15,8 @@ Jeweler::Tasks.new do |gem|
   gem.name = "pretty_time"
   gem.homepage = "http://github.com/andhapp/pretty_time"
   gem.license = "MIT"
-  gem.summary = %Q{TODO: one-line summary of your gem}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.summary = %Q{Serialize time}
+  gem.description = %Q{Serializes time to pretty time string and vica-versa}
   gem.email = "anuj@andhapp.com"
   gem.authors = ["Anuj Dutta"]
   # Include your dependencies below. Runtime dependencies are required when using your gem,
