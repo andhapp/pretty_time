@@ -138,9 +138,45 @@ describe "PrettyTime" do
     it 'should convert 7810 seconds to 2 hours 10 minutes 10 seconds' do
       PrettyTime.load(2.hours.to_i + 10.minutes.to_i + 10).should == "2 hours 10 minutes 10 seconds"
     end
+    
+    context "with configuration defined" do
+      
+      it 'with hours_suffix as hrs and minutes and seconds as default should convert 7800 seconds to 2 hrs 10 minutes' do
+        PrettyTime.configuration do |config|
+          config.hours_suffix = "hrs"
+        end
+        PrettyTime.load(2.hours.to_i + 10.minutes.to_i).should == "2 hrs 10 minutes"
+      end
 
+      it 'with minutes_suffix as mins and hours and seconds as default should convert 7800 seconds to 2 hours 10 mins' do
+        PrettyTime.configuration do |config|
+          config.hours_suffix = "hours"
+          config.minutes_suffix = "mins"
+        end
+        PrettyTime.load(2.hours.to_i + 10.minutes.to_i).should == "2 hours 10 mins"
+      end
+
+      it 'with seconds_suffix as secs and minutes and hours as default should convert 7805 seconds to 2 hours 10 minutes 5 secs' do
+        PrettyTime.configuration do |config|
+          config.hours_suffix = "hours"
+          config.minutes_suffix = "minutes"
+          config.seconds_suffix = "secs"
+        end
+        PrettyTime.load(2.hours.to_i + 10.minutes.to_i + 5).should == "2 hours 10 minutes 5 secs"
+      end
+      
+    end
+    
     context "with fence post cases" do
 
+      before(:each) do
+        PrettyTime.configuration do |config|
+          config.hours_suffix = "hours"
+          config.minutes_suffix = "minutes"
+          config.seconds_suffix = "seconds"
+        end   
+      end
+      
       it 'should convert 3600 seconds to 1 hour' do
         PrettyTime.load(1.hours).should == "1 hour"
       end
@@ -169,6 +205,34 @@ describe "PrettyTime" do
         PrettyTime.load(1.hours.to_i + 1.minutes.to_i + 1).should == "1 hour 1 minute 1 second"
       end
 
+      context "with configuration defined" do
+        
+        it 'with hours_suffix as hrs and minutes and seconds as default should convert 3610 seconds to 1 hr 10 minutes' do
+          PrettyTime.configuration do |config|
+            config.hours_suffix = "hrs"
+          end
+          PrettyTime.load(1.hours.to_i + 10.minutes.to_i).should == "1 hr 10 minutes"
+        end
+
+        it 'with minutes_suffix as mins and hours and seconds as default should convert 7260 seconds to 2 hours 1 min' do
+          PrettyTime.configuration do |config|
+            config.hours_suffix = "hours"
+            config.minutes_suffix = "mins"
+          end
+          PrettyTime.load(2.hours.to_i + 1.minutes.to_i).should == "2 hours 1 min"
+        end
+
+        it 'with seconds_suffix as secs and minutes and hours as default should convert 7801 seconds to 2 hours 10 minutes 1 sec' do
+          PrettyTime.configuration do |config|
+            config.hours_suffix = "hours"
+            config.minutes_suffix = "minutes"
+            config.seconds_suffix = "secs"
+          end
+          PrettyTime.load(2.hours.to_i + 10.minutes.to_i + 1).should == "2 hours 10 minutes 1 sec"
+        end
+        
+      end
+      
     end
 
   end

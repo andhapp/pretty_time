@@ -30,6 +30,16 @@ class PrettyTime
     @pretty_time ||= Core.new
   end
 
+  # Accepts a block and passes the configuration instance to the block
+  def self.configuration
+    yield config
+  end
+
+  # Creates a new configuration instance
+  def self.config
+    @config ||= PrettyTime::Configuration.new    
+  end
+  
   # Parent Class for unit's of time
   # for exaple: Hours, Minutes and Seconds
   class UnitOfTime
@@ -74,13 +84,51 @@ class PrettyTime
   M = Mins = Min = Minute = Minutes
   S = Secs = Sec = Second = Seconds
 
+  # Configuration Class
+  # Defines the suffixes to be used 
+  # when time in seconds is converted to 
+  # pretty time.
+  #
+  # Example:
+  #
+  #   PrettyTime.configuration do |config|
+  #     config.hours_suffix = 'hrs'
+  #     config.minutes_suffix = 'mins'
+  #     config.seconds_suffix = 'secs'
+  #   end
+  #
+  #   PrettyTime.load(7805) # Returns 2 hrs 10 mins 5 secs
+  #
+  # Default values are:
+  #   hours
+  #   minutes
+  #   seconds
+  #
+  class Configuration
+
+    DEFAULT_HOURS_SUFFIX = "hours"
+    DEFAULT_MINUTES_SUFFIX = "minutes"
+    DEFAULT_SECONDS_SUFFIX = "seconds"
+    
+    attr_accessor :hours_suffix, :minutes_suffix, :seconds_suffix
+
+    def hours_suffix
+      @hours_suffix || DEFAULT_HOURS_SUFFIX 
+    end
+
+    def minutes_suffix
+      @minutes_suffix || DEFAULT_MINUTES_SUFFIX
+    end
+  
+    def seconds_suffix
+      @seconds_suffix || DEFAULT_SECONDS_SUFFIX 
+    end
+    
+  end
+
   # Core class which provides the entry point to other useful methods
   class Core
     
-    HOURS = "hours"
-    MINUTES = "minutes"
-    SECONDS = "seconds"
-
     # Core method that does all the work
     def load(time_in_secs)
       hours, minutes, seconds = hours_and_minutes_and_seconds(time_in_secs)
@@ -88,21 +136,21 @@ class PrettyTime
       time_as_pretty_string = "" 
 
       if has_hours?(hours)
-        time_as_pretty_string << "#{with_suffix(hours, HOURS)}" 
+        time_as_pretty_string << "#{with_suffix(hours, PrettyTime.config.hours_suffix)}" 
       end
 
       if has_minutes?(minutes)
         if has_hours?(hours)
           time_as_pretty_string << " "
         end
-        time_as_pretty_string << "#{with_suffix(minutes, MINUTES)}"
+        time_as_pretty_string << "#{with_suffix(minutes, PrettyTime.config.minutes_suffix)}"
       end
 
       if has_seconds?(seconds)
         if has_hours?(hours) || has_minutes?(minutes)
           time_as_pretty_string << " "
         end
-        time_as_pretty_string << "#{with_suffix(seconds, SECONDS)}"
+        time_as_pretty_string << "#{with_suffix(seconds, PrettyTime.config.seconds_suffix)}"
       end
 
       time_as_pretty_string
