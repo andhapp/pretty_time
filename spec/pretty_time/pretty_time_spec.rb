@@ -32,6 +32,30 @@ describe "PrettyTime" do
       PrettyTime.dump("4 hours 40 minutes 30 seconds").should == 4.hours.to_i + 40.minutes.to_i + 30
     end
 
+    it 'should convert A hrs to X seconds' do
+      PrettyTime.dump("4 hrs").should == 4.hours.to_i    
+    end
+
+    it 'should convert B mins to X seconds' do
+      PrettyTime.dump("4 mins").should == 4.minutes.to_i
+    end
+    
+    it 'should convert C secs to X seconds' do
+      PrettyTime.dump("4 secs").should == 4
+    end
+
+    it 'should convert A h to X seconds' do
+      PrettyTime.dump("4 h").should == 4.hours.to_i    
+    end
+
+    it 'should convert B m to X seconds' do
+      PrettyTime.dump("4 m").should == 4.minutes.to_i
+    end
+    
+    it 'should convert C s to X seconds' do
+      PrettyTime.dump("4 s").should == 4
+    end
+    
     context "with fence post cases" do
 
       it 'should convert 1 hour to 3600 seconds' do
@@ -57,6 +81,31 @@ describe "PrettyTime" do
       it 'should convert 1 hour 1 minute 1 second to 3661 seconds' do
         PrettyTime.dump("1 hour 1 minute 1 second").should == 3661
       end
+
+      it 'should convert 1 hr to 3600 seconds' do
+        PrettyTime.dump("1 hr").should == 1.hours.to_i    
+      end
+
+      it 'should convert 1 min to 60 seconds' do
+        PrettyTime.dump("1 min").should == 1.minutes.to_i
+      end
+      
+      it 'should convert 1 sec to 1 second' do
+        PrettyTime.dump("1 sec").should == 1
+      end
+
+      it 'should convert 1 hr to 3600 seconds' do
+        PrettyTime.dump("1 h").should == 1.hours.to_i    
+      end
+
+      it 'should convert 1 min to 60 seconds' do
+        PrettyTime.dump("1 m").should == 1.minutes.to_i
+      end
+      
+      it 'should convert 1 sec to 1 second' do
+        PrettyTime.dump("1 s").should == 1
+      end
+      
     end
   end
 
