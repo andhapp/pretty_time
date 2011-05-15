@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{pretty_time}
-  s.version = "0.1.0"
+  s.version = "0.2.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Anuj Dutta"]
-  s.date = %q{2011-05-01}
+  s.date = %q{2011-05-15}
   s.description = %q{Serializes time to pretty time string and vica-versa}
   s.email = %q{anuj@andhapp.com}
   s.extra_rdoc_files = [
@@ -26,9 +26,9 @@ Gem::Specification.new do |s|
     "Rakefile",
     "VERSION",
     "lib/pretty_time.rb",
-    "lib/pretty_time/core.rb",
+    "lib/pretty_time/pretty_time.rb",
     "pretty_time.gemspec",
-    "spec/pretty_time/core_spec.rb",
+    "spec/pretty_time/pretty_time_spec.rb",
     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/andhapp/pretty_time}
@@ -37,7 +37,7 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.6.2}
   s.summary = %q{Serialize time}
   s.test_files = [
-    "spec/pretty_time/core_spec.rb",
+    "spec/pretty_time/pretty_time_spec.rb",
     "spec/spec_helper.rb"
   ]
 
