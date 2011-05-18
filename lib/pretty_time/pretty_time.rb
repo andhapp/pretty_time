@@ -216,6 +216,17 @@ class PrettyTime
         /^(\d+) (hours?) (\d+) (minutes?)/.match(time_as_pretty_string) ||
         /^(\d+) (minutes?) (\d+) (seconds?)/.match(time_as_pretty_string) ||
         /^(\d+) (hours?) (\d+) (seconds?)/.match(time_as_pretty_string) ||
+
+        /^(\d+) (hrs?) (\d+) (mins?) (\d+) (secs?)/.match(time_as_pretty_string) ||
+        /^(\d+) (hrs?) (\d+) (mins?)/.match(time_as_pretty_string) ||
+        /^(\d+) (mins?) (\d+) (secs?)/.match(time_as_pretty_string) ||
+        /^(\d+) (hrs?) (\d+) (secs?)/.match(time_as_pretty_string) ||
+
+        /^(\d+) (h) (\d+) (m) (\d+) (s)/.match(time_as_pretty_string) ||
+        /^(\d+) (h) (\d+) (m)/.match(time_as_pretty_string) ||
+        /^(\d+) (m) (\d+) (s)/.match(time_as_pretty_string) ||
+        /^(\d+) (h) (\d+) (s)/.match(time_as_pretty_string) ||
+
         /^(\d+)( h| m| s)/.match(time_as_pretty_string) ||
         /^(\d+)( hours?| minutes?| seconds?)/.match(time_as_pretty_string)  ||
         /^(\d+)( hrs?| mins?| secs?)/.match(time_as_pretty_string)

@@ -4,106 +4,186 @@ describe "PrettyTime" do
 
   context "On request to #dump" do
 
-    it 'should convert A hours to X seconds' do
-      PrettyTime.dump("4 hours").should == 4.hours.to_i
-    end
+    context "with hours, minutes and seconds as suffixes" do
+      it 'should convert A hours to X seconds' do
+        PrettyTime.dump("4 hours").should == 4.hours.to_i
+      end
 
-    it 'should convert B minutes to X seconds' do
-      PrettyTime.dump("40 minutes").should == 40.minutes.to_i
-    end
+      it 'should convert B minutes to X seconds' do
+        PrettyTime.dump("40 minutes").should == 40.minutes.to_i
+      end
 
-    it 'should return X seconds as X seconds' do
-      PrettyTime.dump("40 seconds").should == 40
-    end
+      it 'should return X seconds as X seconds' do
+        PrettyTime.dump("40 seconds").should == 40
+      end
 
-    it 'should convert A hours B minutes to X seconds' do
-      PrettyTime.dump("4 hours 40 minutes").should == 4.hours.to_i + 40.minutes.to_i
-    end
+      it 'should convert A hours B minutes to X seconds' do
+        PrettyTime.dump("4 hours 40 minutes").should == 4.hours.to_i + 40.minutes.to_i
+      end
 
-    it 'should convert B minutes C seconds to X seconds' do
-      PrettyTime.dump("40 minutes 30 seconds").should == 40.minutes.to_i + 30
-    end
+      it 'should convert B minutes C seconds to X seconds' do
+        PrettyTime.dump("40 minutes 30 seconds").should == 40.minutes.to_i + 30
+      end
 
-    it 'should convert A hours C seconds to X seconds' do
-      PrettyTime.dump("4 hours 30 seconds").should == 4.hours.to_i + 30
-    end
+      it 'should convert A hours C seconds to X seconds' do
+        PrettyTime.dump("4 hours 30 seconds").should == 4.hours.to_i + 30
+      end
 
-    it 'should convert A hours B minutes C seconds to X seconds' do
-      PrettyTime.dump("4 hours 40 minutes 30 seconds").should == 4.hours.to_i + 40.minutes.to_i + 30
-    end
-
-    it 'should convert A hrs to X seconds' do
-      PrettyTime.dump("4 hrs").should == 4.hours.to_i    
-    end
-
-    it 'should convert B mins to X seconds' do
-      PrettyTime.dump("4 mins").should == 4.minutes.to_i
+      it 'should convert A hours B minutes C seconds to X seconds' do
+        PrettyTime.dump("4 hours 40 minutes 30 seconds").should == 4.hours.to_i + 40.minutes.to_i + 30
+      end
     end
     
-    it 'should convert C secs to X seconds' do
-      PrettyTime.dump("4 secs").should == 4
-    end
+    context "with hrs, mins and secs as suffixes" do
+      it 'should convert A hrs to X seconds' do
+        PrettyTime.dump("4 hrs").should == 4.hours.to_i    
+      end
 
-    it 'should convert A h to X seconds' do
-      PrettyTime.dump("4 h").should == 4.hours.to_i    
-    end
+      it 'should convert B mins to X seconds' do
+        PrettyTime.dump("4 mins").should == 4.minutes.to_i
+      end
 
-    it 'should convert B m to X seconds' do
-      PrettyTime.dump("4 m").should == 4.minutes.to_i
+      it 'should convert C secs to X seconds' do
+        PrettyTime.dump("4 secs").should == 4
+      end
+
+      it 'should convert A hrs B mins to X seconds' do
+        PrettyTime.dump("4 hrs 40 mins").should == 4.hours.to_i + 40.minutes.to_i
+      end
+
+      it 'should convert B mins C secs to X seconds' do
+        PrettyTime.dump("4 mins 40 secs").should == 4.minutes.to_i + 40
+      end
+
+      it 'should convert A hrs C secs to X seconds' do
+        PrettyTime.dump("4 hrs 40 secs").should == 4.hours.to_i + 40
+      end
+
+      it 'should convert A hrs B mins C secs to X seconds' do
+        PrettyTime.dump("4 hrs 40 mins 30 secs").should == 4.hours.to_i + 40.minutes.to_i + 30
+      end
     end
     
-    it 'should convert C s to X seconds' do
-      PrettyTime.dump("4 s").should == 4
+    context "with h, m and s as suffixes" do
+      it 'should convert A h to X seconds' do
+        PrettyTime.dump("4 h").should == 4.hours.to_i    
+      end
+
+      it 'should convert B m to X seconds' do
+        PrettyTime.dump("4 m").should == 4.minutes.to_i
+      end
+    
+      it 'should convert C s to X seconds' do
+        PrettyTime.dump("4 s").should == 4
+      end
+    
+      it 'should convert A h B m to X seconds' do
+        PrettyTime.dump("4 h 40 m").should == 4.hours.to_i + 40.minutes.to_i
+      end
+
+      it 'should convert B m C s to X seconds' do
+        PrettyTime.dump("4 m 40 s").should == 4.minutes.to_i + 40
+      end
+
+      it 'should convert A h C s to X seconds' do
+        PrettyTime.dump("4 h 40 s").should == 4.hours.to_i + 40
+      end
+
+      it 'should convert A h B m C s to X seconds' do
+        PrettyTime.dump("4 h 40 m 30 s").should == 4.hours.to_i + 40.minutes.to_i + 30
+      end
     end
     
     context "with fence post cases" do
 
-      it 'should convert 1 hour to 3600 seconds' do
-        PrettyTime.dump("1 hour").should == 3600
-      end
+      context "with hour, minute and second as suffixes" do
+        it 'should convert 1 hour to 3600 seconds' do
+          PrettyTime.dump("1 hour").should == 3600
+        end
 
-      it 'should convert 1 minute to 60 seconds' do
-        PrettyTime.dump("1 minute").should == 60
-      end
+        it 'should convert 1 minute to 60 seconds' do
+          PrettyTime.dump("1 minute").should == 60
+        end
 
-      it 'should return 1 second as 1 second' do
-        PrettyTime.dump("1 second").should == 1
-      end
+        it 'should return 1 second as 1 second' do
+          PrettyTime.dump("1 second").should == 1
+        end
 
-      it 'should convert 1 hour 1 minute to 3660 seconds' do
-        PrettyTime.dump("1 hour 1 minute").should == 3660
-      end
+        it 'should convert 1 hour 1 minute to 3660 seconds' do
+          PrettyTime.dump("1 hour 1 minute").should == 3660
+        end
 
-      it 'should convert 1 minute 1 second to 61 seconds' do
-        PrettyTime.dump("1 minute 1 second").should == 61
-      end
+        it 'should convert 1 minute 1 second to 61 seconds' do
+          PrettyTime.dump("1 minute 1 second").should == 61
+        end
 
-      it 'should convert 1 hour 1 minute 1 second to 3661 seconds' do
-        PrettyTime.dump("1 hour 1 minute 1 second").should == 3661
-      end
+        it 'should convert 1 hour 1 second to 3601 seconds' do
+          PrettyTime.dump("1 hour 1 second").should == 3601
+        end
 
-      it 'should convert 1 hr to 3600 seconds' do
-        PrettyTime.dump("1 hr").should == 1.hours.to_i    
-      end
-
-      it 'should convert 1 min to 60 seconds' do
-        PrettyTime.dump("1 min").should == 1.minutes.to_i
+        it 'should convert 1 hour 1 minute 1 second to 3661 seconds' do
+          PrettyTime.dump("1 hour 1 minute 1 second").should == 3661
+        end
       end
       
-      it 'should convert 1 sec to 1 second' do
-        PrettyTime.dump("1 sec").should == 1
-      end
+      context "with hr, min and sec as suffixes" do
+        it 'should convert 1 hr to 3600 seconds' do
+          PrettyTime.dump("1 hr").should == 1.hours.to_i    
+        end
 
-      it 'should convert 1 hr to 3600 seconds' do
-        PrettyTime.dump("1 h").should == 1.hours.to_i    
-      end
-
-      it 'should convert 1 min to 60 seconds' do
-        PrettyTime.dump("1 m").should == 1.minutes.to_i
-      end
+        it 'should convert 1 min to 60 seconds' do
+          PrettyTime.dump("1 min").should == 1.minutes.to_i
+        end
       
-      it 'should convert 1 sec to 1 second' do
-        PrettyTime.dump("1 s").should == 1
+        it 'should convert 1 sec to 1 second' do
+          PrettyTime.dump("1 sec").should == 1
+        end
+
+        it 'should convert 1 hr 1 min to 3660 seconds' do
+          PrettyTime.dump("1 hr 1 min").should == 3660
+        end
+
+        it 'should convert 1 min 1 sec to 61 seconds' do
+          PrettyTime.dump("1 min 1 sec").should == 61
+        end
+
+        it 'should convert 1 hr 1 sec to 3601 seconds' do
+          PrettyTime.dump("1 hr 1 sec").should == 3601
+        end
+
+        it 'should convert 1 hr 1 min 1 sec to 3661 seconds' do
+          PrettyTime.dump("1 hr 1 min 1 sec").should == 3661
+        end
+      end
+
+      context "with h, m and s as suffixes" do
+        it 'should convert 1 h to 3600 seconds' do
+          PrettyTime.dump("1 h").should == 1.hours.to_i    
+        end
+
+        it 'should convert 1 m to 60 seconds' do
+          PrettyTime.dump("1 m").should == 1.minutes.to_i
+        end
+      
+        it 'should convert 1 s to 1 second' do
+          PrettyTime.dump("1 s").should == 1
+        end
+
+        it 'should convert 1 h 1 m to 3660 seconds' do
+          PrettyTime.dump("1 h 1 m").should == 3660
+        end
+
+        it 'should convert 1 m 1 s to 61 seconds' do
+          PrettyTime.dump("1 m 1 s").should == 61
+        end
+
+        it 'should convert 1 h 1 s to 3601 seconds' do
+          PrettyTime.dump("1 h 1 s").should == 3601
+        end
+
+        it 'should convert 1 h 1 m 1 s to 3661 seconds' do
+          PrettyTime.dump("1 h 1 m 1 s").should == 3661
+        end
       end
       
     end
