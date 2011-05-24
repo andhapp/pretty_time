@@ -33,7 +33,7 @@ describe "PrettyTime" do
         PrettyTime.dump("4 hours 40 minutes 30 seconds").should == 4.hours.to_i + 40.minutes.to_i + 30
       end
     end
-    
+
     context "with hrs, mins and secs as suffixes" do
       it 'should convert A hrs to X seconds' do
         PrettyTime.dump("4 hrs").should == 4.hours.to_i    
@@ -63,20 +63,20 @@ describe "PrettyTime" do
         PrettyTime.dump("4 hrs 40 mins 30 secs").should == 4.hours.to_i + 40.minutes.to_i + 30
       end
     end
-    
+
     context "with h, m and s as suffixes" do
       it 'should convert A h to X seconds' do
-        PrettyTime.dump("4 h").should == 4.hours.to_i    
+        PrettyTime.dump("4 h").should == 4.hours.to_i
       end
 
       it 'should convert B m to X seconds' do
         PrettyTime.dump("4 m").should == 4.minutes.to_i
       end
-    
+
       it 'should convert C s to X seconds' do
         PrettyTime.dump("4 s").should == 4
       end
-    
+
       it 'should convert A h B m to X seconds' do
         PrettyTime.dump("4 h 40 m").should == 4.hours.to_i + 40.minutes.to_i
       end
@@ -93,7 +93,21 @@ describe "PrettyTime" do
         PrettyTime.dump("4 h 40 m 30 s").should == 4.hours.to_i + 40.minutes.to_i + 30
       end
     end
-    
+
+    context "with mix-n-match suffixes like A hours B mins | A hrs B minutes" do
+      it 'should convert A hrs B minutes to X seconds' do
+        PrettyTime.dump("4 hrs 40 minutes").should == 4.hours.to_i + 40.minutes.to_i
+      end
+
+      it 'should convert A hrs B m to X seconds' do
+        PrettyTime.dump("4 hrs 40 m").should == 4.hours.to_i + 40.minutes.to_i
+      end
+
+      it 'should convert A h B minutes to X seconds' do
+        PrettyTime.dump("4 h 40 minutes").should == 4.hours.to_i + 40.minutes.to_i
+      end
+    end
+
     context "with fence post cases" do
 
       context "with hour, minute and second as suffixes" do
@@ -185,7 +199,21 @@ describe "PrettyTime" do
           PrettyTime.dump("1 h 1 m 1 s").should == 3661
         end
       end
-      
+
+      context "with mix-n-match suffixes like A hours B mins | A hrs B minutes" do
+        it 'should convert 1 hr 10 minutes to 4200 seconds' do
+          PrettyTime.dump("1 hr 10 minutes").should == 1.hours.to_i + 10.minutes.to_i
+        end
+
+        it 'should convert 1 hrs 1 m to X seconds' do
+          PrettyTime.dump("1 hrs 1 m").should == 1.hour.to_i + 1.minute.to_i
+        end
+
+        it 'should convert 1 h 1 minutes to X seconds' do
+          PrettyTime.dump("1 h 1 minutes").should == 1.hour.to_i + 1.minute.to_i
+        end
+      end
+
     end
   end
 
@@ -286,7 +314,7 @@ describe "PrettyTime" do
       end
 
       context "with configuration defined" do
-        
+
         it 'with hours_suffix as hrs and minutes and seconds as default should convert 3610 seconds to 1 hr 10 minutes' do
           PrettyTime.configuration do |config|
             config.hours_suffix = "hrs"
@@ -310,9 +338,9 @@ describe "PrettyTime" do
           end
           PrettyTime.load(2.hours.to_i + 10.minutes.to_i + 1).should == "2 hours 10 minutes 1 sec"
         end
-        
+
       end
-      
+
     end
 
   end

@@ -37,14 +37,14 @@ class PrettyTime
 
   # Creates a new configuration instance
   def self.config
-    @config ||= PrettyTime::Configuration.new    
+    @config ||= PrettyTime::Configuration.new
   end
-  
+
   # Parent Class for unit's of time
   # for exaple: Hours, Minutes and Seconds
   class UnitOfTime
     attr_accessor :value
-    
+
     def initialize(value)
       @value = value
     end
@@ -212,26 +212,16 @@ class PrettyTime
       #   match_it("4 hrs 1 min")
       #
       def match_it(time_as_pretty_string)
-        /^(\d+) (hours?) (\d+) (minutes?) (\d+) (seconds?)/.match(time_as_pretty_string) ||
-        /^(\d+) (hours?) (\d+) (minutes?)/.match(time_as_pretty_string) ||
-        /^(\d+) (minutes?) (\d+) (seconds?)/.match(time_as_pretty_string) ||
-        /^(\d+) (hours?) (\d+) (seconds?)/.match(time_as_pretty_string) ||
-
-        /^(\d+) (hrs?) (\d+) (mins?) (\d+) (secs?)/.match(time_as_pretty_string) ||
-        /^(\d+) (hrs?) (\d+) (mins?)/.match(time_as_pretty_string) ||
-        /^(\d+) (mins?) (\d+) (secs?)/.match(time_as_pretty_string) ||
-        /^(\d+) (hrs?) (\d+) (secs?)/.match(time_as_pretty_string) ||
-
-        /^(\d+) (h) (\d+) (m) (\d+) (s)/.match(time_as_pretty_string) ||
-        /^(\d+) (h) (\d+) (m)/.match(time_as_pretty_string) ||
-        /^(\d+) (m) (\d+) (s)/.match(time_as_pretty_string) ||
-        /^(\d+) (h) (\d+) (s)/.match(time_as_pretty_string) ||
+        /^(\d+) (hours?|hrs?|h) (\d+) (minutes?|mins?|m) (\d+) (seconds?|secs?|s)/.match(time_as_pretty_string) ||
+        /^(\d+) (hours?|hrs?|h) (\d+) (minutes?|mins?|m)/.match(time_as_pretty_string) ||
+        /^(\d+) (minutes?|mins?|m) (\d+) (seconds?|secs?|s)/.match(time_as_pretty_string) ||
+        /^(\d+) (hours?|hrs?|h) (\d+) (seconds?|secs?|s)/.match(time_as_pretty_string) ||
 
         /^(\d+)( h| m| s)/.match(time_as_pretty_string) ||
         /^(\d+)( hours?| minutes?| seconds?)/.match(time_as_pretty_string)  ||
         /^(\d+)( hrs?| mins?| secs?)/.match(time_as_pretty_string)
       end
-      
+
     alias :has_hours? :non_zero?
     alias :has_minutes? :non_zero?
     alias :has_seconds? :non_zero?
